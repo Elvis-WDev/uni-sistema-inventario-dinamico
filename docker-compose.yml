@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      DB_HOST: "${DB_HOST:?DB_HOST es requerido}"
+      DB_PORT: "${DB_PORT:-3306}"
+      DB_NAME: "${DB_NAME:?DB_NAME es requerido}"
+      DB_USER: "${DB_USER:?DB_USER es requerido}"
+      DB_PASS: "${DB_PASS:?DB_PASS es requerido}"
+      DB_CHARSET: "${DB_CHARSET:-utf8mb4}"
