@@ -1,6 +1,3 @@
--- Antes de importar este archivo, crea o selecciona una base de datos.
--- Nombre sugerido para XAMPP: tecnomarket
-
 CREATE TABLE IF NOT EXISTS productos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,

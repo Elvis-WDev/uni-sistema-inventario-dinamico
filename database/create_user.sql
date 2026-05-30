@@ -1,6 +1,3 @@
--- Ejecutar con un usuario administrador de MySQL.
--- Reemplaza la contraseña antes de ejecutar este archivo.
-
 CREATE DATABASE IF NOT EXISTS `sistema-inventario-dinamico`
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
