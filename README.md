@@ -100,4 +100,4 @@ No agregues un servicio MySQL al Compose; este sistema está preparado para cone
 3. Subir todos los archivos del sistema al directorio público del servidor.
 4. Configurar `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` y `DB_PASS` en el entorno del servidor.
 
-URL de producción: `PENDIENTE_DE_REEMPLAZAR_CON_LA_URL`
+URL de producción: `minipos.elvismacas.com`
