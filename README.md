@@ -54,6 +54,34 @@ El número de destino está configurado en `assets/js/cart.js`:
 const WHATSAPP_NUMBER = '593983987321';
 ```
 
+## Evidencias
+
+Las capturas del sistema se guardan en la carpeta `evidencias`.
+
+### Sitio y catálogo
+
+Página principal con hero, filtros y productos cargados desde la base de datos.
+
+![Sitio y catálogo](evidencias/02-sitio-inicio-catalogo.png)
+
+### Formulario de contacto
+
+Vista del formulario para solicitudes de clientes.
+
+![Formulario de contacto](evidencias/04-formulario-contacto.png)
+
+### Formulario enviado
+
+Confirmación visible después de enviar el formulario de contacto.
+
+![Formulario enviado](evidencias/05-formulario-contacto-enviado.png)
+
+Capturas de phpMyAdmin por guardar en `evidencias/`:
+
+- `01-base-datos-estructura.png`: estructura de la base `sistema-inventario-dinamico`.
+- `03-tabla-productos.png`: registros de la tabla `productos`.
+- `06-tabla-contactos.png`: registros de la tabla `contactos`.
+
 ## Despliegue en Docker/Dokploy
 
 El contenedor no incluye MySQL. La aplicación se conecta a una base remota usando variables de entorno.
