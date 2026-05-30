@@ -41,6 +41,16 @@ try {
 } catch (Throwable $exception) {
     error_log('Database connection error: ' . $exception->getMessage());
     $dbError = 'No se pudo conectar con la base de datos. Verifica las variables DB_HOST, DB_NAME, DB_USER y DB_PASS, e importa database/schema.sql.';
+
+    if (app_debug_enabled()) {
+        $config = db_connection_summary();
+        $dbError .= ' Detalle: ' . $exception->getMessage()
+            . ' | host=' . $config['host']
+            . ' | port=' . $config['port']
+            . ' | database=' . $config['database']
+            . ' | user=' . $config['user']
+            . ' | password_set=' . ($config['password_set'] ? 'yes' : 'no');
+    }
 }
 
 require_once __DIR__ . '/includes/header.php';

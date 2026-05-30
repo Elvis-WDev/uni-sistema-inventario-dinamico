@@ -47,6 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Throwable $exception) {
             error_log('Database insert error: ' . $exception->getMessage());
             $errors['general'] = 'No se pudo guardar el mensaje. Verifica las variables de conexión con MySQL.';
+
+            if (app_debug_enabled()) {
+                $config = db_connection_summary();
+                $errors['general'] .= ' Detalle: ' . $exception->getMessage()
+                    . ' | host=' . $config['host']
+                    . ' | port=' . $config['port']
+                    . ' | database=' . $config['database']
+                    . ' | user=' . $config['user']
+                    . ' | password_set=' . ($config['password_set'] ? 'yes' : 'no');
+            }
         }
     }
 }

@@ -58,6 +58,23 @@ function first_config_value(array $keys, string $default = ''): string
     return $default;
 }
 
+function app_debug_enabled(): bool
+{
+    return in_array(strtolower(config_value('APP_DEBUG', 'false')), ['1', 'true', 'yes', 'on'], true);
+}
+
+function db_connection_summary(): array
+{
+    return [
+        'host' => first_config_value(['DB_HOST'], '127.0.0.1'),
+        'port' => first_config_value(['DB_PORT'], '3306'),
+        'database' => first_config_value(['DB_NAME', 'DB_DATABASE'], 'tecnomarket'),
+        'user' => first_config_value(['DB_USER', 'DB_USERNAME'], 'root'),
+        'password_set' => first_config_value(['DB_PASS', 'DB_PASSWORD'], '') !== '',
+        'charset' => config_value('DB_CHARSET', 'utf8mb4'),
+    ];
+}
+
 load_env_file(__DIR__ . '/../.env');
 
 function db(): PDO
@@ -68,10 +85,11 @@ function db(): PDO
         return $pdo;
     }
 
-    $host = first_config_value(['DB_HOST'], '127.0.0.1');
-    $port = first_config_value(['DB_PORT'], '3306');
-    $name = first_config_value(['DB_NAME', 'DB_DATABASE'], 'tecnomarket');
-    $user = first_config_value(['DB_USER', 'DB_USERNAME'], 'root');
+    $config = db_connection_summary();
+    $host = $config['host'];
+    $port = $config['port'];
+    $name = $config['database'];
+    $user = $config['user'];
     $pass = first_config_value(['DB_PASS', 'DB_PASSWORD'], '');
     $charset = config_value('DB_CHARSET', 'utf8mb4');
 
