@@ -1,20 +1,17 @@
 # TecnoMarket
 
-Sistema web para una tienda ficticia de productos tecnológicos. Permite mostrar un catálogo dinámico cargado desde MySQL, registrar consultas de clientes y preparar pedidos por WhatsApp desde un carrito de compras.
+Sistema web para una tienda de productos tecnológicos. Permite mostrar un catálogo dinámico cargado desde MySQL, registrar consultas de clientes y preparar pedidos por WhatsApp desde un carrito de compras.
 
 ## Estructura
 
 - `index.php`: catálogo dinámico con búsqueda y filtro por categoría.
 - `contacto.php`: formulario con validación en cliente y servidor.
 - `checkout.php`: carrito, resumen de compra y envío del pedido por WhatsApp.
-- `config/database.php`: credenciales de conexión a MySQL.
+- `config/database.php`: conexión MySQL basada en variables de entorno o archivo `.env`.
 - `includes/`: cabecera, pie de página y funciones auxiliares.
 - `assets/css/styles.css`: estilos del sitio.
 - `assets/js/cart.js`: lógica del carrito, cantidades, total y mensaje de WhatsApp.
 - `database/schema.sql`: creación de tablas y productos de ejemplo.
-- `Dockerfile`: imagen PHP 8.2 con Apache y extensión `pdo_mysql`.
-- `docker-compose.yml`: servicio web para despliegue con Docker Compose.
-- `.env.example`: variables necesarias para conectar con una base MySQL remota.
 
 ## Instalación local en XAMPP
 
@@ -22,7 +19,7 @@ Sistema web para una tienda ficticia de productos tecnológicos. Permite mostrar
 2. Iniciar Apache y MySQL desde XAMPP.
 3. Crear una base de datos llamada `tecnomarket`.
 4. Seleccionar esa base de datos en phpMyAdmin e importar `database/schema.sql`.
-5. Revisar las variables de conexión usadas por `config/database.php`:
+5. Crear un archivo `.env` si necesitas usar credenciales distintas a las locales:
 
 ```env
 DB_HOST=127.0.0.1
@@ -30,6 +27,7 @@ DB_PORT=3306
 DB_NAME=tecnomarket
 DB_USER=root
 DB_PASS=
+DB_CHARSET=utf8mb4
 ```
 
 6. Abrir el sistema en el navegador:
@@ -56,25 +54,28 @@ El número de destino está configurado en `assets/js/cart.js`:
 const WHATSAPP_NUMBER = '593983987321';
 ```
 
-## Despliegue con Docker Compose
+## Despliegue en Docker/Dokploy
 
-El despliegue usa una sola imagen PHP/Apache. No incluye MySQL, porque la base de datos debe existir en un servidor remoto.
+El contenedor no incluye MySQL. La aplicación se conecta a una base remota usando variables de entorno.
 
 1. Crear una base de datos MySQL remota.
-2. Importar `database/schema.sql` en esa base de datos.
-3. Copiar `.env.example` como `.env` o configurar esas variables en Dokploy.
-4. Completar las variables con los datos reales de la base remota:
+2. Importar `database/schema.sql`.
+3. Crear o configurar el usuario MySQL con permisos sobre la base.
+4. En Dokploy, definir las variables de `.env.example`.
+5. Configurar el proxy/dominio hacia el puerto interno `80`.
+
+Ejemplo de variables:
 
 ```env
-DB_HOST=host-remoto-de-mysql
+DB_HOST=host.docker.internal
 DB_PORT=3306
 DB_NAME=tecnomarket
-DB_USER=usuario_remoto
-DB_PASS=clave_remota
+DB_USER=tecnomarket_user
+DB_PASS=clave_segura_del_usuario
 DB_CHARSET=utf8mb4
 ```
 
-5. Desplegar con Docker Compose:
+Si MySQL está en otro servidor, reemplaza `DB_HOST` por el host o IP real. Si MySQL está en el mismo servidor que Docker/Dokploy, puedes probar con `host.docker.internal`.
 
 ```bash
 docker compose up -d --build

@@ -39,7 +39,8 @@ try {
     $statement->execute($params);
     $products = $statement->fetchAll();
 } catch (Throwable $exception) {
-    $dbError = 'No se pudo conectar con la base de datos. Revisa config/database.php e importa database/schema.sql.';
+    error_log('Database connection error: ' . $exception->getMessage());
+    $dbError = 'No se pudo conectar con la base de datos. Verifica las variables DB_HOST, DB_NAME, DB_USER y DB_PASS, e importa database/schema.sql.';
 }
 
 require_once __DIR__ . '/includes/header.php';

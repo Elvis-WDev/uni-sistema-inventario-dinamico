@@ -45,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sent = true;
             $old = ['nombre' => '', 'correo' => '', 'mensaje' => ''];
         } catch (Throwable $exception) {
-            $errors['general'] = 'No se pudo guardar el mensaje. Verifica la conexión con MySQL.';
+            error_log('Database insert error: ' . $exception->getMessage());
+            $errors['general'] = 'No se pudo guardar el mensaje. Verifica las variables de conexión con MySQL.';
         }
     }
 }
