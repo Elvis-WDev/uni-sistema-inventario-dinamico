@@ -9,13 +9,22 @@ if (PHP_SAPI !== 'cli') {
 
 require_once __DIR__ . '/../config/database.php';
 
-$keys = ['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_CHARSET'];
+$keys = [
+    'DB_HOST',
+    'DB_PORT',
+    'DB_NAME',
+    'DB_DATABASE',
+    'DB_USER',
+    'DB_USERNAME',
+    'DB_CHARSET',
+];
 
 echo "Database environment\n";
 foreach ($keys as $key) {
     echo $key . '=' . config_value($key, '(empty)') . PHP_EOL;
 }
 echo 'DB_PASS=' . (config_value('DB_PASS') !== '' ? '(set)' : '(empty)') . PHP_EOL;
+echo 'DB_PASSWORD=' . (config_value('DB_PASSWORD') !== '' ? '(set)' : '(empty)') . PHP_EOL;
 echo PHP_EOL;
 
 try {

@@ -67,15 +67,25 @@ El contenedor no incluye MySQL. La aplicación se conecta a una base remota usan
 Ejemplo de variables:
 
 ```env
+APP_PORT=9005
+
 DB_HOST=host.docker.internal
 DB_PORT=3306
 DB_NAME=tecnomarket
 DB_USER=tecnomarket_user
 DB_PASS=clave_segura_del_usuario
+DB_DATABASE=tecnomarket
+DB_USERNAME=tecnomarket_user
+DB_PASSWORD=clave_segura_del_usuario
 DB_CHARSET=utf8mb4
 ```
 
 Si MySQL está en otro servidor, reemplaza `DB_HOST` por el host o IP real. Si MySQL está en el mismo servidor que Docker/Dokploy, puedes probar con `host.docker.internal`.
+
+El sistema acepta ambos formatos de variables:
+
+- `DB_NAME`, `DB_USER`, `DB_PASS`
+- `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
 
 ```bash
 docker compose up -d --build

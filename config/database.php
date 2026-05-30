@@ -45,6 +45,19 @@ function config_value(string $key, string $default = ''): string
     return (string) $value;
 }
 
+function first_config_value(array $keys, string $default = ''): string
+{
+    foreach ($keys as $key) {
+        $value = config_value($key);
+
+        if ($value !== '') {
+            return $value;
+        }
+    }
+
+    return $default;
+}
+
 load_env_file(__DIR__ . '/../.env');
 
 function db(): PDO
@@ -55,11 +68,11 @@ function db(): PDO
         return $pdo;
     }
 
-    $host = config_value('DB_HOST', '127.0.0.1');
-    $port = config_value('DB_PORT', '3306');
-    $name = config_value('DB_NAME', 'tecnomarket');
-    $user = config_value('DB_USER', 'root');
-    $pass = config_value('DB_PASS', '');
+    $host = first_config_value(['DB_HOST'], '127.0.0.1');
+    $port = first_config_value(['DB_PORT'], '3306');
+    $name = first_config_value(['DB_NAME', 'DB_DATABASE'], 'tecnomarket');
+    $user = first_config_value(['DB_USER', 'DB_USERNAME'], 'root');
+    $pass = first_config_value(['DB_PASS', 'DB_PASSWORD'], '');
     $charset = config_value('DB_CHARSET', 'utf8mb4');
 
     $dsn = sprintf(

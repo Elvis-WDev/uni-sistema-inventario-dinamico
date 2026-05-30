@@ -1,3 +1,15 @@
+x-app-env: &app-env
+  APP_PORT: ${APP_PORT:-9005}
+  DB_HOST: ${DB_HOST:-127.0.0.1}
+  DB_PORT: ${DB_PORT:-3306}
+  DB_NAME: ${DB_NAME:-${DB_DATABASE:-tecnomarket}}
+  DB_USER: ${DB_USER:-${DB_USERNAME:-root}}
+  DB_PASS: ${DB_PASS:-${DB_PASSWORD:-}}
+  DB_DATABASE: ${DB_DATABASE:-${DB_NAME:-tecnomarket}}
+  DB_USERNAME: ${DB_USERNAME:-${DB_USER:-root}}
+  DB_PASSWORD: ${DB_PASSWORD:-${DB_PASS:-}}
+  DB_CHARSET: ${DB_CHARSET:-utf8mb4}
+
 services:
   app:
     build:
@@ -9,17 +21,15 @@ services:
         required: false
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    ports:
+      - "${APP_PORT:-9005}:80"
     expose:
       - "80"
     environment:
-      DB_HOST: "${DB_HOST:?DB_HOST es requerido}"
-      DB_PORT: "${DB_PORT:-3306}"
-      DB_NAME: "${DB_NAME:?DB_NAME es requerido}"
-      DB_USER: "${DB_USER:?DB_USER es requerido}"
-      DB_PASS: "${DB_PASS:?DB_PASS es requerido}"
-      DB_CHARSET: "${DB_CHARSET:-utf8mb4}"
+      <<: *app-env
     networks:
       - dokploy-network
+      - default
 
 networks:
   dokploy-network:
