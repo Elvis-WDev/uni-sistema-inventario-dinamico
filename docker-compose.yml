@@ -18,3 +18,9 @@ services:
       DB_USER: "${DB_USER:?DB_USER es requerido}"
       DB_PASS: "${DB_PASS:?DB_PASS es requerido}"
       DB_CHARSET: "${DB_CHARSET:-utf8mb4}"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

@@ -89,8 +89,9 @@ Dentro del contenedor Apache escucha en el puerto `80`. En Dokploy configura el 
 2. Usar `docker-compose.yml` como archivo Compose.
 3. Definir las variables de `.env.example` en el panel de variables de entorno.
 4. Configurar el dominio o proxy de Dokploy apuntando al puerto interno `80` del servicio.
-5. Verificar que la base MySQL remota permita conexiones desde el servidor donde corre Dokploy.
-6. Desplegar la aplicación.
+5. Verificar que el servicio esté conectado a la red externa `dokploy-network`.
+6. Verificar que la base MySQL remota permita conexiones desde el servidor donde corre Dokploy.
+7. Desplegar la aplicación.
 
 No agregues un servicio MySQL al Compose; este sistema está preparado para conectarse a una base externa mediante variables de entorno.
 
