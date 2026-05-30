@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/header.php';
         <form class="contact-form" method="post" action="contacto.php">
             <?php if ($sent): ?>
                 <div class="notice success" role="status">
-                    Mensaje enviado correctamente. Tus datos fueron registrados en MySQL.
+                    Mensaje enviado correctamente.
                 </div>
             <?php endif; ?>
 
