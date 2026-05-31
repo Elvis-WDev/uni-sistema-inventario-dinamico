@@ -139,13 +139,13 @@ textarea {
 .hero {
     position: relative;
     overflow: hidden;
-    min-height: 470px;
+    min-height: 520px;
     display: grid;
-    align-items: end;
+    align-items: center;
     color: #ffffff;
     background:
-        linear-gradient(95deg, rgba(12, 23, 18, 0.86), rgba(12, 23, 18, 0.5) 56%, rgba(12, 23, 18, 0.18)),
-        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=82") center/cover;
+        radial-gradient(circle at 78% 24%, rgba(223, 77, 53, 0.34), transparent 30%),
+        linear-gradient(135deg, #12221c 0%, #173f35 58%, #25372e 100%);
 }
 
 .hero::after {
@@ -160,6 +160,8 @@ textarea {
     position: relative;
     z-index: 1;
     display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 360px);
+    align-items: center;
     gap: 30px;
     padding: 70px 0 58px;
 }
@@ -196,6 +198,21 @@ textarea {
     font-size: 1.12rem;
 }
 
+.hero-photo {
+    justify-self: end;
+    width: min(360px, 100%);
+    margin: 0;
+}
+
+.hero-photo img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 10px;
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.32);
+}
+
 .eyebrow {
     margin: 0 0 12px;
     color: var(--tomato);
@@ -216,6 +233,7 @@ textarea {
 }
 
 .hero-stats {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 180px));
     gap: 12px;
@@ -895,6 +913,15 @@ textarea:focus {
         min-height: 520px;
     }
 
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+        justify-self: start;
+        width: min(260px, 72vw);
+    }
+
     .hero-copy h1 {
         font-size: 3.7rem;
     }
@@ -958,12 +985,15 @@ textarea:focus {
 
     .hero {
         min-height: 0;
-        background-position: center;
     }
 
     .hero-content {
         gap: 22px;
         padding: 40px 0 34px;
+    }
+
+    .hero-photo {
+        width: min(220px, 76vw);
     }
 
     .hero-copy h1 {

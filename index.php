@@ -59,29 +59,33 @@ require_once __DIR__ . '/includes/header.php';
 <section class="hero">
     <div class="container hero-content">
         <div class="hero-copy">
-            <p class="eyebrow">Tienda tecnológica</p>
-            <h1>TecnoMarket</h1>
+            <p class="eyebrow">Presentación personal</p>
+            <h1>Elvis Michael</h1>
             <p>
-                Equipos, accesorios y dispositivos seleccionados para estudiar, trabajar
-                y crear con una experiencia de compra clara y directa.
+                Soy un estudiante interesado en el desarrollo web, la tecnología y la creación
+                de soluciones digitales útiles. Me gusta aprender con proyectos prácticos,
+                explorar herramientas nuevas y convertir ideas en sistemas funcionales.
             </p>
             <div class="hero-actions">
                 <a class="button primary" href="#catalogo">Ver productos</a>
-                <a class="button light" href="contacto.php">Consultar disponibilidad</a>
+                <a class="button light" href="contacto.php">Contactarme</a>
             </div>
         </div>
-        <dl class="hero-stats" aria-label="Resumen de la tienda">
+        <figure class="hero-photo">
+            <img src="evidencias/me.jpeg" alt="Foto personal de Elvis Michael">
+        </figure>
+        <dl class="hero-stats" aria-label="Resumen personal">
             <div>
-                <dt><?= $dbError === null ? count($products) : '6+' ?></dt>
-                <dd>productos</dd>
+                <dt>Web</dt>
+                <dd>desarrollo PHP</dd>
             </div>
             <div>
-                <dt>24h</dt>
-                <dd>respuesta</dd>
+                <dt>Tech</dt>
+                <dd>tecnología</dd>
             </div>
             <div>
-                <dt>5</dt>
-                <dd>categorías</dd>
+                <dt>Crear</dt>
+                <dd>proyectos prácticos</dd>
             </div>
         </dl>
     </div>
